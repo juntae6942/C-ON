@@ -1,0 +1,124 @@
+.orderPage {
+  max-width: 500px;
+  min-width: 300px;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 20px 20px 0 0;
+}
+
+header {
+  width: 100%;
+  height: 120px;
+  position: relative;
+  background-color: #3fdecb;
+  border-radius: 20px 20px 0 0;
+}
+
+.header-1 {
+  position: relative;
+  width: 100%;
+  height: 120px;
+}
+
+.character {
+  position: absolute;
+  top: 10px;
+  left: 40px;
+  right: 0;
+  width: 80px;
+  height: 60px;
+
+  background: url("images/character.png") no-repeat 0 0 / 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.logo {
+  position: absolute;
+  top: 65px;
+  left: 20px;
+  width: 130px;
+  height: 80px;
+  background: url("images/logo.png") no-repeat 0 0 / 100%;
+}
+
+.order {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  right: 80px;
+  top: 40px;
+  background: url("images/order.png") no-repeat 0 0 / 100% 100%;
+  text-align: center;
+}
+
+.cart {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  right: 25px;
+  top: 40px;
+  background: url("images/cart.png") no-repeat 0 0 / 100% 100%;
+}
+
+
+.orderLogo {
+  width: 130px;
+  height: 40px;
+  top: 40px;
+  left: 190px;
+  position: absolute;
+  background: url("images/order_list.png") no-repeat 0 0 / 100% 100%;
+}
+
+main {
+  width: 100%;
+  height: calc(100vh - 120px); /* header 높이를 뺀 나머지 부분을 main 요소의 높이로 설정 */
+  overflow-y: auto;
+}
+
+.orderContainer {
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.orderContainer p {
+  font-size: 20px;
+  font-weight: 400;
+  margin: 10px;
+}
+.orderMain {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.orderItem {
+  display: flex;
+  padding: 15px 10px;
+  justify-content: space-between;
+}
+
+.orderPrice {
+  display: flex;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.search {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  right: 135px;
+  top: 40px;
+  background: url("images/search.png") no-repeat 0 0 / 100% 100%;
+}

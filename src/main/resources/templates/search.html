@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>C-ON</title>
+    <link rel="stylesheet" href="search.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" />
+  </head>
+  <body>
+    <div class="searchPage">
+      <header>
+        <div class="header">
+          <a href="main"> <div class="character"></div></a>
+          <a href="main"> <div class="logo"></div></a>
+          <a href="order"><div class="order"></div></a>
+          <a href="cart"><div class="cart"></div></a>
+          <a href="search"><div class="search"></div></a>
+        </div>
+      </header>
+      <div class="searchContainer">
+        <form action="search" method="post">
+          <input id="keyWord" name="keyWord" type="text" placeholder="검색어를 입력하세요." />
+          <div>
+            <input id="minPrice" name="minPrice" placeholder="최소금액" />
+            <input id="maxPrice" name="maxPrice" placeholder="최대금액" />
+          </div>
+          <button type="submit">검 색</button>
+        </form>
+      </div>
+      <div th:if="${foods != null}">
+        <div th:each="food:${foods}" class="foodContainer">
+          <div class="foodimage"></div>
+          <div class="foodInfo">
+            <p th:text="${food.name()}">초밥1</p>
+            <p th:text="${food.price()}">1,000(1ps)</p>
+          </div>
+          <button class="foodSelect" th:data-name="${food.name}" th:data-price="${food.price}" onclick="addToCart(this)">메뉴 담기</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      function addToCart(button) {
+        const name = button.getAttribute('data-name');
+        const price = button.getAttribute('data-price');
+
+        fetch('/cart/add', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name: name, price: price }),
+        })
+                .then(response => {
+                  if (response.ok) {
+                    alert('장바구니에 추가되었습니다!');
+                  } else {
+                    alert('장바구니 추가 실패.');
+                  }
+                })
+                .catch(error => {
+                  console.error('Error:', error);
+                  alert('장바구니 추가 중 오류가 발생했습니다.');
+                });
+      }
+    </script>
+  </body>
+</html>

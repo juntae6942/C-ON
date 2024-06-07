@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>C-ON</title>
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" />
+    <script src="../static/main.js" defer></script>
+  </head>
+  <body>
+    <div class="mainPage">
+      <header>
+        <div class="header-1">
+          <a href="main"><div class="character"></div></a>
+          <a href="main"><div class="logo"></div></a>
+          <a href="search"><div class="search"></div></a>
+          <a href="order"><div class="order"></div></a>
+          <a href="cart"><div class="cart"></div></a>
+        </div>
+        <div class="header-2">
+          <button class="btn-sushi" th:onclick="|location.href='@{/main}'|">초밥</button>
+          <button class="btn-drink" th:onclick="|location.href='@{/drink}'|">음료</button>
+          <button class="btn-fried" th:onclick="|location.href='@{/fried}'|">튀김류</button>
+          <button class="btn-noodle" th:onclick="|location.href='@{/noodle}'|">면류</button>
+        </div>
+      </header>
+      <main>
+        <div id="sushi" class="food active">
+          <div th:each="drink:${drink}" class="foodContainer">
+            <div class="foodimage"></div>
+            <div class="foodInfo">
+              <p th:text="${drink.name()}">초밥1</p>
+              <p th:text="${drink.price()}">1,000(1ps)</p>
+            </div>
+            <button class="foodSelect" th:data-name="${drink.name}" th:data-price="${drink.price}" onclick="addToCart(this)">메뉴 담기</button>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script>
+      function addToCart(button) {
+        const name = button.getAttribute('data-name');
+        const price = button.getAttribute('data-price');
+
+        fetch('/cart/add', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name: name, price: price }),
+        })
+                .then(response => {
+                  if (response.ok) {
+                    alert('장바구니에 추가되었습니다!');
+                  } else {
+                    alert('장바구니 추가 실패.');
+                  }
+                })
+                .catch(error => {
+                  console.error('Error:', error);
+                  alert('장바구니 추가 중 오류가 발생했습니다.');
+                });
+      }
+    </script>
+  </body>
+</html>

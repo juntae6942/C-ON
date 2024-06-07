@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C-ON</title>
+  <link rel="stylesheet" href="cart.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" />
+  <script src="cart.js" defer></script>
+</head>
+<body>
+<div class="cartPage">
+  <header>
+    <a href="cart"><div class="cartLogo"></div></a>
+    <div class="header-1">
+      <a href="main"><div class="character"></div></a>
+      <a href="main"><div class="logo"></div></a>
+      <a href="order"><div class="order"></div></a>
+      <a href="cart"><div class="cart"></div></a>
+    </div>
+  </header>
+    <div id="foodList" th:each="item:${item}">
+      <div class="foodItem" th:data-price="${item.price()}">
+        <p th:id="itemName" th:text="${item.name()}">초밥</p>
+        <p th:id="quantity" class="quantity">1 ps</p>
+        <div>
+          <button onclick="changeQuantity(this, 1)">+</button>
+          <button onclick="changeQuantity(this, -1)">－</button>
+        </div>
+        <p th:id="totalPrice" class="itemTotalPrice" th:text="|${item.price()}원|">0</p>
+      </div>
+    </div>
+    <div class="totalPrice">
+      <p>총 주문금액</p>
+      <p id="totalAmount">6,000원</p>
+    </div>
+    <div class="orderButton">
+      <button type="submit" onclick="submitOrder()">주문하기</button>
+    </div>
+</div>
+</body>
+<script th:inline="javascript">
+  function submitOrder() {
+    const customerId = [[${customerId}]]; // 실제 고객 ID로 대체
+    const items = document.querySelectorAll('.foodItem');
+    const orderInfos = [];
+
+    items.forEach(item => {
+      const name = item.querySelector('#itemName').textContent;
+      const price = parseInt(item.getAttribute('data-price'));
+      const quantity = parseInt(item.querySelector('.quantity').textContent);
+
+      orderInfos.push({
+        foodName: name,
+        price: price,
+        quantity: quantity
+      });
+    });
+
+    fetch('/order', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        customerId: customerId,
+        orderInfos: orderInfos
+      })
+    }).then(response => {
+              if (response.ok) {
+                alert('주문이 성공적으로 완료되었습니다!');
+                window.location.href = '/order'
+              } else {
+                alert('주문에 실패했습니다.');
+              }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              alert('주문 중 오류가 발생했습니다.');
+            });
+  }
+</script>
+</html>

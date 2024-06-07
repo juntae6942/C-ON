@@ -1,0 +1,171 @@
+.cartPage {
+  max-width: 500px;
+  min-width: 300px;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  border-radius: 20px 20px 0 0;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+
+header {
+  width: 100%;
+  height: 120px;
+  position: relative;
+  background-color: #3fdecb;
+  border-radius: 20px 20px 0 0;
+}
+
+.header-1 {
+  position: relative;
+  width: 100%;
+  height: 120px;
+}
+
+.character {
+  position: absolute;
+  top: 10px;
+  left: 40px;
+  right: 0;
+  width: 80px;
+  height: 60px;
+
+  background: url("images/character.png") no-repeat 0 0 / 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.logo {
+  position: absolute;
+  top: 65px;
+  left: 20px;
+  width: 130px;
+  height: 80px;
+  background: url("images/logo.png") no-repeat 0 0 / 100%;
+}
+
+.order {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  right: 80px;
+  top: 40px;
+  background: url("images/order.png") no-repeat 0 0 / 100% 100%;
+  text-align: center;
+}
+
+.cart {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  right: 25px;
+  top: 40px;
+  background: url("images/cart.png") no-repeat 0 0 / 100% 100%;
+}
+
+.cartLogo {
+  width: 120px;
+  height: 50px;
+  top: 40px;
+  left: 200px;
+  position: absolute;
+  background: url("images/cartLogo.png") no-repeat 0 0 / 100% 100%;
+}
+#foodList {
+  width: 100%;
+}
+.foodItem {
+  width: 80%;
+  margin: 0 auto;
+  border-radius: 30px;
+}
+
+.cartImage {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 20px;
+  width: 40px;
+  height: 40px;
+
+  background: url("images/cart.png") no-repeat 0 0 / 100% 100%;
+}
+
+.foodList {
+  margin-top: 30px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.foodItem {
+  margin-top: 15px;
+  width: 90%;
+  height: 60px;
+  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.foodItem > div {
+  display: flex;
+  gap: 10px;
+}
+.foodItem button {
+  border: none;
+  border-radius: 50%;
+  font-weight: bold;
+  background-color: white;
+  font-size: 30px;
+}
+
+.totalPrice {
+  width: 60%;
+  height: 80px;
+  align-self: flex-start;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 15px;
+  margin-left: 5%;
+  position: relative;
+}
+.totalPrice p:nth-child(1) {
+  font-size: 15px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+.totalPrice p:nth-child(2) {
+  position: absolute;
+  bottom: 10px;
+  right: 30px;
+  font-size: 30px;
+}
+
+.orderButton {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.orderButton button {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 15px;
+  width: 40%;
+  height: 50px;
+  border: none;
+  border-radius: 15px;
+  font-size: 30px;
+}
+.orderButton button:active {
+  border: 2px solid black;
+  background-color: rgba(0, 0, 0, 0.1);
+}

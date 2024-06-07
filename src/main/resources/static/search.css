@@ -1,0 +1,184 @@
+.searchPage {
+  max-width: 500px;
+  min-width: 300px;
+  height: 100vh;
+  margin: 0 auto;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 20px 20px 0 0;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #3fdecb;
+  border-radius: 20px 20px 0 0;
+}
+
+.header {
+  position: relative;
+  width: 100%;
+  height: 120px;
+}
+
+.character {
+  position: absolute;
+  top: 10px;
+  left: 40px;
+  right: 0;
+  width: 80px;
+  height: 50px;
+
+  background: url("images/character.png") no-repeat 0 0 / 100% 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.logo {
+  position: absolute;
+  top: 65px;
+  left: 20px;
+  width: 130px;
+  height: 80px;
+  background: url("images/logo.png") no-repeat 0 0 / 100%;
+}
+
+.order {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  right: 80px;
+  top: 40px;
+  background: url("images/order.png") no-repeat 0 0 / 100% 100%;
+  text-align: center;
+}
+
+.cart {
+  position: absolute;
+  width: 50px;
+  height: 40px;
+  right: 25px;
+  top: 40px;
+  background: url("images/cart.png") no-repeat 0 0 / 100% 100%;
+}
+
+.search {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  right: 135px;
+  top: 40px;
+  background: url("images/search.png") no-repeat 0 0 / 100% 100%;
+}
+
+.searchContainer > form {
+  width: 100%;
+  background-color: #d9d9d9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.searchContainer > form > input {
+  width: 90%;
+  height: 40px;
+  padding: 0 5px;
+  border-radius: 30px;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.searchContainer > form > div {
+  width: 90%;
+  gap: 10px;
+  display: flex;
+}
+
+.searchContainer > form > div > input {
+  width: 100%;
+  height: 40px;
+  padding: 0 5px;
+  border-radius: 30px;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  text-align: center;
+}
+
+.searchContainer > form > button {
+  background-color: #474eff;
+  color: white;
+  width: 90%;
+  border-radius: 15px;
+  height: 40px;
+  border: none;
+  border-radius: 15px;
+  font-size: 25px;
+  align-self: center;
+  margin-bottom: 20px;
+}
+
+.searchContainer > form > button:active {
+  border: 3px solid black;
+}
+
+.foodInfo {
+  position: absolute;
+  font-size: 20px;
+  top: 50px;
+  left: 230px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: center;
+  align-items: start;
+}
+.foodSelect {
+  position: absolute;
+  width: 80px;
+  height: 30px;
+  right: 20px;
+  bottom: 25px;
+  border: none;
+  background-color: #3fdecb;
+  border-radius: 15px;
+  font-weight: bold;
+}
+
+.foodSelect:active {
+  border: 2px solid black;
+}
+
+.foodContainer {
+  width: 100%;
+  height: 200px;
+  background-color: white;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.food {
+  display: none;
+}
+
+.food.active {
+  display: block;
+}
+
+.foodimage {
+  width: 165px;
+  height: 150px;
+  border-radius: 15px;
+  background-color: aqua;
+  position: absolute;
+  left: 30px;
+  bottom: 25px;
+}

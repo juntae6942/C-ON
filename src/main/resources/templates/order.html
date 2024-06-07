@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>C-ON</title>
+    <link rel="stylesheet" href="order.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" />
+    <script src="../static/order.js" defer></script>
+  </head>
+  <body>
+    <div class="orderPage">
+      <header>
+        <a href="order"><div class="orderLogo"></div></a>
+        <div class="header-1">
+          <a href="main"><div class="character"></div></a>
+          <a href="main"><div class="logo"></div></a>
+          <a href="search"><div class="search"></div></a>
+          <a href="order"><div class="order"></div></a>
+          <a href="cart"><div class="cart"></div></a>
+        </div>
+      </header>
+      <main>
+        <div class="orderContainer" >
+
+          <div class="orderMain" th:each="orders:${orderList}">
+            <p th:text="${orders.getLocalDateTime()}">2024-00-00</p>
+            <div class="orderItem" th:each="order:${orders.getOrderInfos()}">
+              <p th:text="${order.foodName()}">장어 초밥</p>
+              <p th:text="${order.quantity()}">3 ps</p>
+              <p th:text="${order.price()}">9,000</p>
+            </div>
+            <div class="orderPrice">
+              <p>총 주문 금액</p>
+              <p th:text="${orders.getTotalPrice()}">27,000</p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
