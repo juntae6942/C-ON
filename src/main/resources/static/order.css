@@ -122,3 +122,10 @@ main {
   top: 40px;
   background: url("images/search.png") no-repeat 0 0 / 100% 100%;
 }
+
+#orderSearchInput {
+  width: 80%;
+  margin: 0 auto;
+  gap: 10px;
+  display: flex;
+}

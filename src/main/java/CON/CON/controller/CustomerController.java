@@ -5,6 +5,7 @@ import CON.CON.dto.FoodInfo;
 import CON.CON.dto.LoginInfo;
 import CON.CON.dto.OrderInfo;
 import CON.CON.dto.OrderRequest;
+import CON.CON.dto.OrderSearch;
 import CON.CON.dto.SearchInfo;
 import CON.CON.service.CartService;
 import CON.CON.service.CustomerService;
@@ -139,6 +140,23 @@ public class CustomerController {
         model.addAttribute("foods", foods);
         return "search";
     }
+
+    @GetMapping("/order/search")
+    public String getSearchPageDuring(Model model, @ModelAttribute OrderSearch orderSearch) {
+        log.info("customerId search : {}", customerId);
+        List<OrderRequest> requests = orderService.findByDuring(customerId, orderSearch.start(), orderSearch.end());
+        for (OrderRequest request : requests) {
+            int totalPrice = 0;
+            for (OrderInfo order : request.getOrderInfos()) {
+                totalPrice += order.price();
+            }
+            request.setTotalPrice(totalPrice);
+        }
+        log.info("customerId : {}",requests.get(0).getCustomerId());
+        model.addAttribute("orderList", requests);
+        return "order";
+    }
+
     @ResponseBody
     @GetMapping("/revenue")
     public List<String> getRevenueEachCustomer(@ModelAttribute LoginInfo loginInfo) {

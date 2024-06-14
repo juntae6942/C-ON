@@ -1,6 +1,5 @@
 package CON.CON.service;
 
-import CON.CON.dto.CustomerSalesRank;
 import CON.CON.dto.OrderInfo;
 import CON.CON.dto.OrderRequest;
 import CON.CON.model.Cart;
@@ -8,12 +7,15 @@ import CON.CON.model.Customer;
 import CON.CON.model.Food;
 import CON.CON.model.OrderDetail;
 import CON.CON.repository.OrderDetailRepository;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+import org.antlr.v4.runtime.misc.NotNull;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -52,22 +54,7 @@ public class OrderService {
 
     public List<OrderRequest> findByCno(String cno) {
         List<Cart> carts = cartService.findAllByCno(cno);
-        List<OrderRequest> requests = new ArrayList<>();
-        for (Cart cart : carts) {
-            List<OrderInfo> list = orderDetailRepository.findAllById(cart).stream()
-                    .map(orderDetail -> OrderInfo.builder()
-                            .foodName(orderDetail.getFoodName().getFoodName())
-                            .price(orderDetail.getTotalPrice())
-                            .quantity(orderDetail.getQuantity()).build()).toList();
-            OrderRequest request = OrderRequest.builder()
-                    .localDateTime(LocalDateTime.parse(cart.getDateTime().toString()).format(formatter))
-                    .customerId(cart.getCno().getCno())
-                    .orderInfos(list)
-                    .build();
-            requests.add(request);
-        }
-
-        return requests;
+        return getOrderRequests(carts);
     }
 
     public List<String> printCustomerOrderTotalForCurrentMonth() {
@@ -83,5 +70,36 @@ public class OrderService {
 
     public List<Object[]> getSalesRanking() {
         return orderDetailRepository.getSalesRanking();
+    }
+
+    public List<OrderRequest> findByDuring(String cno, LocalDate start, LocalDate end) {
+        LocalDateTime s = start.atStartOfDay();
+        LocalDateTime e = end.plusDays(1).atStartOfDay().minusNanos(1);
+        List<Cart> carts = cartService.findByDuring(s, e);
+        log.info("carts id 0 = {}",carts.get(0).getId());
+        List<Cart> list = carts.stream().filter(cart -> cart.getCno().getCno().equals(cno)).toList();
+        log.info("carts size {}", list.size());
+        return getOrderRequests(list);
+    }
+
+    @NotNull
+    private List<OrderRequest> getOrderRequests(List<Cart> carts) {
+        List<OrderRequest> requests = new ArrayList<>();
+        for (Cart cart : carts) {
+            List<OrderInfo> list = orderDetailRepository.findAllById(cart).stream()
+                    .map(orderDetail -> OrderInfo.builder()
+                            .foodName(orderDetail.getFoodName().getFoodName())
+                            .price(orderDetail.getTotalPrice())
+                            .quantity(orderDetail.getQuantity()).build()).toList();
+            OrderRequest request = OrderRequest.builder()
+                    .localDateTime(LocalDateTime.parse(cart.getDateTime().toString()).format(formatter))
+                    .customerId(cart.getCno().getCno())
+                    .orderInfos(list)
+                    .build();
+            requests.add(request);
+        }
+        log.info("request size {}", requests.size());
+        log.info("request {}", requests.get(0));
+        return requests;
     }
 }

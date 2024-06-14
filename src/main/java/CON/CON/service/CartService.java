@@ -5,6 +5,7 @@ import CON.CON.model.Cart;
 import CON.CON.model.Customer;
 import CON.CON.repository.CartRepository;
 import CON.CON.repository.CustomerRepository;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -54,5 +55,9 @@ public class CartService {
 
     public void clearCart() {
         cart.clear();
+    }
+
+    public List<Cart> findByDuring(LocalDateTime start, LocalDateTime end) {
+        return cartRepository.findByDateTimeBetween(start, end);
     }
 }
